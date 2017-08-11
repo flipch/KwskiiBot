@@ -1,6 +1,5 @@
 const request = require("request");
 const getYoutubeID = require("get-youtube-id");
-const fetchVideoInfo = require("youtube-info");
 const fs = require("fs");
 
 var Config = JSON.parse(fs.readFileSync(`./settings.json`, `utf-8`));

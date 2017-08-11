@@ -9,6 +9,7 @@ const client = new Discord.Client();
 const ytdl = require("ytdl-core");
 const fs = require("fs");
 const util = require("./utils.js");
+const fetchVideoInfo = require("youtube-info");
 
 console.log("Modules loaded");
 
@@ -39,19 +40,12 @@ client.on('ready', e => {
 });
 
 
-
-
 client.on('message', async message => {
     var prefix = message.content[0];
 
     // Is the message supposed to be read?
     if (prefix == Config.prefix) {
         console.log(`-------------------------------`);
-
-        // SUPER FAST HYPER PING
-
-        const m = await message.channel.send("Ping?");
-        m.edit(`Pong! Latency is ${m.createdTimestamp - message.createdTimestamp}ms. API Latency is ${Math.round(client.ping)}ms`);
 
         // Logging for perfomance factor
         const current = new Date();
@@ -78,6 +72,11 @@ client.on('message', async message => {
         console.log(`Argument requested [${args}]`);
 
         switch (command) {
+            case 'ping':
+                // SUPER FAST HYPER PING
+                const m = await message.channel.send("Ping?");
+                m.edit(`:ping_pong: Pong!\nLatency to Server is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(client.ping)}ms`);
+                break;
             case 'play':
                 // Plays or Adds if already playing a song to queue
                 if (Data.queue.length > 0 || Data.isPlaying) {
