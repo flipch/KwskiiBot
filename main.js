@@ -90,14 +90,14 @@ client.on('message', async message => {
                         });
                     });
                 } else {
-                    isPlaying = true;
+                    Data.isPlaying = true;
                     util.getID(args, function (id) {
                         Data.queue.push("placeholder");
                         playMusic(id, message);
                         fetchVideoInfo(id, function (err, videoInfo) {
                             if (err) throw new Error(err);
                             else {
-                                message.reply("Now playing: **" + videoInfo.title + "**");
+                                message.reply(`Now Playing: **${videoInfo.title}**`);
                             }
                         });
                     });
@@ -119,13 +119,14 @@ client.on('message', async message => {
 });
 
 function playMusic(id, message) {
+    const streamOptions = {seek: 0, volume: 1};
     voiceChannel = message.member.voiceChannel;
     voiceChannel.join().then(function (connection) {
         stream = ytdl("https://www.youtube.com/watch?v=" + id, {
             filter: 'audioonly'
         });
 
-        Data.dispatcher = connection.playStream(stream);
+        Data.dispatcher = connection.playStream(stream, streamOptions);
     });
 
 }
