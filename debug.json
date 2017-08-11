@@ -1,0 +1,68 @@
+[{
+    socket: GatewaySocket {
+        Dispatcher: DiscordieDispatcher {
+            domain: null,
+            _events: [Object],
+            _eventsCount: 18,
+            _maxListeners: 14,
+            _anyeventlisteners: []
+        },
+        socket: BaseSocket {
+            domain: null,
+            _events: [Object],
+            _eventsCount: 4,
+            _maxListeners: undefined,
+            _socket: [Object],
+            _ultron: [Object],
+            _closeReceived: false,
+            bytesReceived: 4701,
+            readyState: 1,
+            supports: [Object],
+            extensions: {},
+            _binaryType: 'nodebuffer',
+            _isServer: false,
+            url: 'wss://gateway.discord.gg/?encoding=json&v=6',
+            protocolVersion: 13,
+            _connectionTimer: null,
+            _receiver: [Object],
+            _sender: [Object]
+        },
+        voiceStates: Map {},
+        voiceSockets: Map {},
+        userId: '345618607188869120',
+        sendQueue: [],
+        seq: 5,
+        heartbeatAck: true,
+        lastHeartbeatAckTime: 173378318.323342,
+        remoteGatewayVersion: 6,
+        gatewayURL: 'wss://gateway.discord.gg',
+        sessionId: '8d6588df63a9cf4b5f765f9aed6e53b0'
+    },
+    message: IMessage {
+        id: '345634562287861760',
+        type: 0,
+        channel_id: '314505030201769984',
+        author: IUser {
+            id: '345618607188869120',
+            username: 'KwskiiBot',
+            discriminator: '5708',
+            avatar: null,
+            bot: true
+        },
+        content: 'PONG',
+        attachments: [],
+        embeds: [],
+        mentions: [],
+        mention_roles: [],
+        mention_everyone: false,
+        tts: false,
+        timestamp: '2017-08-11T18:28:21.229000+00:00',
+        edited_timestamp: null,
+        nonce: '4531565025058212',
+        webhook_id: null,
+        reactions: [],
+        pinned: false,
+        call: null,
+        deleted: false
+    }
+}]

@@ -1,0 +1,35 @@
+{
+  "name": "kwskiibot",
+  "version": "1.0.0",
+  "description": "A discord bot",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kwskii/KwskiiBot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "kwskii"
+  ],
+  "author": "Felipe Heliszkowski",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kwskii/KwskiiBot/issues"
+  },
+  "homepage": "https://github.com/kwskii/KwskiiBot#readme",
+  "dependencies": {
+    "discord.js" : "latest",
+    "ytdl-core": "latest",
+    "get-youtube-id": "latest",
+    "youtube-info": "latest",
+    "fs": "latest",
+    "forever": "latest",
+    "cluster": "latest",
+    "opusscript": "latest",
+    "ffmpeg-binaries": "latest"
+  }
+}
