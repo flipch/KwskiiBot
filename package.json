@@ -26,8 +26,6 @@
     "ytdl-core": "latest",
     "get-youtube-id": "latest",
     "youtube-info": "latest",
-    "fs": "latest",
-    "forever": "latest",
     "cluster": "latest",
     "opusscript": "latest",
     "ffmpeg-binaries": "latest"
