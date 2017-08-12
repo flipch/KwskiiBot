@@ -6,13 +6,13 @@ var Config = JSON.parse(fs.readFileSync(`./settings.json`, `utf-8`));
 
 module.exports = {
     isYoutube: function (str) {
-        return str.toLowerCase().indexOf("youtube.com") > -1;
+        return str.includes("youtube.com");
     },
     search_video: function (query, callback) {
-        request(`https://googlwapis.com/youtube/v3/search?part=id&type=video&q=${encodeURIComponent(query)}&key=${Config.youtube_api}`,
+        request(`https://www.googleapis.com/youtube/v3/search?part=id&type=video&q=${encodeURIComponent(query)}&key=${Config.youtube_api}`,
             function (error, response, body) {
                 var json = JSON.parse(body);
-                callback(json.items[0].id.videoID);
+                callback(json.items[0].id.videoId);
             });
     },
     getID: function (str, callback) {

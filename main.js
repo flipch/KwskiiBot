@@ -80,6 +80,9 @@ client.on('message', async message => {
             case 'play':
                 // Plays or Adds if already playing a song to queue
                 if (Data.queue.length > 0 || Data.isPlaying) {
+                    util.getID(args, function(id){
+
+                    });
                     playMusic(args, function (id) {
                         Data.addToQueue(id);
                         fetchVideoInfo(id, function (err, videoInfo) {
@@ -119,12 +122,11 @@ client.on('message', async message => {
 });
 
 function playMusic(id, message) {
-    voiceChannel = message.member.voiceChannel;
+    const voiceChannel = message.member.voiceChannel;
     voiceChannel.join().then(function (connection) {
-        stream = fs.createReadStream('./music/current.mp3');
-        ytdl("https://www.youtube.com/watch?v=" + id, {
+        const stream = ytdl("https://www.youtube.com/watch?v=" + id, {
             filter: 'audioonly'
-        }).pipe(stream);
+        });
         Data.dispatcher = connection.playStream(stream);
     });
 }
