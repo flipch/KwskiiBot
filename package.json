@@ -22,7 +22,7 @@
   },
   "homepage": "https://github.com/kwskii/KwskiiBot#readme",
   "dependencies": {
-    "discord.js" : "latest",
+    "discord.js": "latest",
     "ytdl-core": "latest",
     "get-youtube-id": "latest",
     "youtube-info": "latest",

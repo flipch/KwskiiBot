@@ -52,7 +52,7 @@ client.on('message', async message => {
 
         // Refactoring for utility purpose
         const author = message.author;
-        const content = message.content.substring(1).toLowerCase();
+        const content = message.content.substring(1);
         const channel = message.channel;
 
         // Get the command requested
@@ -119,14 +119,12 @@ client.on('message', async message => {
 });
 
 function playMusic(id, message) {
-    const streamOptions = {seek: 0, volume: 1};
     voiceChannel = message.member.voiceChannel;
     voiceChannel.join().then(function (connection) {
-        stream = ytdl("https://www.youtube.com/watch?v=" + id, {
+        stream = fs.createReadStream('./music/current.mp3');
+        ytdl("https://www.youtube.com/watch?v=" + id, {
             filter: 'audioonly'
-        });
-
-        Data.dispatcher = connection.playStream(stream, streamOptions);
+        }).pipe(stream);
+        Data.dispatcher = connection.playStream(stream);
     });
-
 }
