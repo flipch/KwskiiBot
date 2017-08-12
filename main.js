@@ -47,9 +47,6 @@ client.on('message', async message => {
     if (prefix == Config.prefix) {
         console.log(`-------------------------------`);
 
-        // Logging for perfomance factor
-        const current = new Date();
-
         // Refactoring for utility purpose
         const author = message.author;
         const content = message.content.substring(1);
@@ -80,40 +77,41 @@ client.on('message', async message => {
             case 'play':
                 // Plays or Adds if already playing a song to queue
                 if (Data.queue.length > 0 || Data.isPlaying) {
-                    util.getID(args, function(id){
-
-                    });
-                    playMusic(args, function (id) {
-                        Data.addToQueue(id);
+                    util.getID(args, function (id) {
                         fetchVideoInfo(id, function (err, videoInfo) {
                             if (err) throw new Error(err);
                             else {
-                                message.reply("Added to queue: **" + videoInfo.title + "**");
+                                Data.queue.push([id, videoInfo]);
+                                message.reply(`Added to queue: **${videoInfo.title}**`);
+                                console.log(`Added to queue: [${videoInfo.title}]`);
                             }
                         });
                     });
                 } else {
                     Data.isPlaying = true;
                     util.getID(args, function (id) {
-                        Data.queue.push("placeholder");
-                        playMusic(id, message);
                         fetchVideoInfo(id, function (err, videoInfo) {
                             if (err) throw new Error(err);
                             else {
-                                message.reply(`Now Playing: **${videoInfo.title}**`);
+                                Data.queue.push([id, videoInfo]);
+                                playMusic(id, message);
+                                console.log(`Now Playing: [${videoInfo.title}]`);
                             }
                         });
                     });
                 }
                 break;
-            case 'stop' || 'clear':
+            case 'stop':
                 // Stops/Clear the queue
                 break;
-            case 'next' || 'skip':
-                // Skips the current song
+            case 'next':
+                if(Data.isPlaying)
+                    Data.dispatcher.end();
                 break;
-            case 'summon':
-                // Tells the bot to join the channel where you are
+            case 'restart':
+                // Exits app, which has been started hopefully with forever npm package
+                // By exiting, the app will restart itself
+                process.exit(0);
                 break;
         }
     } else {
@@ -123,10 +121,20 @@ client.on('message', async message => {
 
 function playMusic(id, message) {
     const voiceChannel = message.member.voiceChannel;
+    const videoInfo = Data.queue[0][1];
     voiceChannel.join().then(function (connection) {
         const stream = ytdl("https://www.youtube.com/watch?v=" + id, {
             filter: 'audioonly'
         });
+        message.reply(`Now Playing: **${videoInfo.title}**`);
         Data.dispatcher = connection.playStream(stream);
+        Data.dispatcher.on('end', function () {
+            Data.queue.shift();
+            if (Data.queue.length === 0) {
+                Data.isPlaying = false;
+            } else {
+                playMusic(Data.queue[0][0], message);
+            }
+        });
     });
 }

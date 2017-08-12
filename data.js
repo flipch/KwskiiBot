@@ -14,14 +14,6 @@ class Data {
         this.skipReq = 0; // TO-DO
         this.skippers = []; //TO-DO
     }
-
-    addToQueue(strID) {
-        if (isYoutube(strID)) {
-            this.queue.push(getYoutubeID(strID));
-        } else{
-            this.queue.push(strID);
-        }
-    }
 }
 
 module.exports = Data;
